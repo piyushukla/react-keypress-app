@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { ReactKeypress } from './components/ReactKeypress';
+import { A } from './components/A';
+import { B } from './components/B';
+import { C } from './components/C';
+import { D } from './components/D';
+import { ToggleD } from './components/ToggleD';
+import { HelpContainer } from './components/HelpContainer';
 import './App.css';
 
-function App() {
+export default function App() {
+  const [visible, setVisible] = useState({ A: true, B: true, C: true, D: true });
+
+  const toggle = (key) => {
+    setVisible((prev) => ({ ...prev, [key]: prev[key] }));
+  };
+
+  const toggleDVisibility = () => {
+    setVisible(prev => ({ ...prev, D: !prev.D }));
+  };
+
+  const combos = [
+    { keys: 'shift a', on_keydown: () => toggle('A') },
+    { keys: 'shift b', on_keydown: () => toggle('B') },
+    { keys: 'shift c', on_keydown: () => toggle('C') },
+    { keys: 'shift d', on_keydown: () => toggle('D') },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ReactKeypress combos={combos}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', width: '100vw', height: '80vh' }}>
+        <A onClick={() => toggle('A')} />
+        <B onClick={() => toggle('B')} />
+        <C onClick={() => toggle('C')} />
+        {visible.D ? <D onClick={() => toggle('D')} /> : <div className="placeholder-box"></div>}
+      </div>
+      <ToggleD isMounted={visible.D} toggleMount={toggleDVisibility} />
+      <HelpContainer />
+    </ReactKeypress>
   );
 }
-
-export default App;

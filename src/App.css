@@ -36,3 +36,54 @@
     transform: rotate(360deg);
   }
 }
+.keypress-item {
+  width: 50%;
+  height: 50%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  visibility: visible;
+}
+
+.keypress-item.active {
+  background: #ccc98b;
+  color: black;
+}
+
+.keypress-item.inactive {
+  background: blue;
+  color: white;
+}
+
+.keypress-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 80vh;
+}
+
+.toggle-button {
+  margin: 10px;
+  background:blue;
+  color:white;
+  border:none;
+  padding:15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.help-container {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.placeholder-box {
+  width: 50%;
+  height: 50%;
+}
